@@ -16,3 +16,16 @@ services:
       - "3000:3000"
     depends_on:
       - db
+
+  pgadmin4:
+    image: dpage/pgadmin4:latest
+    volumes:
+      - ./docker/pgadmin4:/var/lib/pgadmin
+    ports:
+      - "8000:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@example.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    depends_on:
+      - db
+    restart: always
