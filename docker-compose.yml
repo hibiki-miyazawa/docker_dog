@@ -5,7 +5,11 @@ services:
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
     environment:
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
+      POSTGRES_DB: test_db
+    ports:
+      - 5433:5432
 
   web:
     build: .
@@ -29,3 +33,7 @@ services:
     depends_on:
       - db
     restart: always
+
+volumes:
+  db:
+  pgadmin4:
