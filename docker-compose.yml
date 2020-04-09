@@ -38,7 +38,7 @@ services:
     <<: *app_base
     command: bash -c "rm -rf public/packs && bin/webpack-dev-server"
     ports:
-      - "8080:8080"
+      - "3035:3035"
     depends_on:
       - web
 
