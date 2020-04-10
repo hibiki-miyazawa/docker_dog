@@ -36,11 +36,12 @@ services:
 
   webpack:
     <<: *app_base
-    command: bash -c "bin/webpack-dev-server"
+    command: bash -c "rm -rf public/packs; bin/webpack-dev-server"
     ports:
       - "3035:3035"
     depends_on:
       - web
+    
 
 volumes:
   db:
