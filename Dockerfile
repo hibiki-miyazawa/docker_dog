@@ -16,6 +16,7 @@ COPY Gemfile /docker_dog/Gemfile
 COPY Gemfile.lock /docker_dog/Gemfile.lock
 RUN bundle install
 COPY . /docker_dog
+RUN yarn --pure-lockfile
 
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh

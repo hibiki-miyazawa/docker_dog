@@ -18,6 +18,7 @@ services:
       WEBPACKER_DEV_SERVER_HOST: webpack
     volumes:
       - .:/docker_dog
+      - /docker_dog/node_modules/
     ports:
       - "3000:3000"
     depends_on:
