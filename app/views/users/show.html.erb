@@ -8,4 +8,12 @@
             </h1>
         </section>
     </aside>
+    <div>
+        <% if @user.microposts.any? %>
+        <h3>投稿(<%= @user.microposts.count %>)</h3>
+        <ol>
+            <%= render @microposts %>
+        </ol>
+        <% end %>
+    </div>
 </div>

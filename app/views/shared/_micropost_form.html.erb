@@ -1,0 +1,10 @@
+<%= form_for(@micropost) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <div>
+        <%= f.text_area :content %>
+    </div>
+    <%= f.submit "投稿", class: "btn" %>
+    <span>
+        <%= f.file_field :image %>
+    </span>
+<% end %>

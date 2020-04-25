@@ -1,0 +1,41 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: "One post."
+  created_at: <%= 10.minutes.ago %>
+  user: michael
+
+two:
+  content: "Two post."
+  created_at: <%= 3.years.ago %>
+  user: michael
+
+three: 
+  content: "Three post."
+  created_at: <%= 2.hours.ago %>
+  user: michael
+
+most_recent:
+  content: "Four post."
+  created_at: <%= Time.zone.now %>
+  user: michael
+
+ants: 
+  content: "Archer first post!"
+  created_at: <%= 2.years.ago %>
+  user: archer
+
+zone:
+  content: "Archer second post!"
+  created_at: <%= 3.days.ago %>
+  user: archer
+
+tone:
+  content: "Lana first post!"
+  created_at: <%= 10.minutes.ago %>
+  user: lana
+
+van:
+  content: "Lana second post!"
+  created_at: <%= 4.hours.ago %>
+  user: lana
