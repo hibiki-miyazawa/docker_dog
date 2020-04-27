@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_24_101833) do
+ActiveRecord::Schema.define(version: 2020_04_27_170830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "dogs", force: :cascade do |t|
+    t.string "name"
+    t.integer "gender"
+    t.date "birthday"
+    t.string "type"
+    t.string "hospital"
+    t.string "salon"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "image_name"
+    t.index ["user_id"], name: "index_dogs_on_user_id"
+  end
 
   create_table "microposts", force: :cascade do |t|
     t.text "content"
@@ -36,5 +50,6 @@ ActiveRecord::Schema.define(version: 2020_04_24_101833) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "dogs", "users"
   add_foreign_key "microposts", "users"
 end

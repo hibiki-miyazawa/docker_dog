@@ -82,4 +82,12 @@ class UserTest < ActiveSupport::TestCase
       @user.destroy
     end
   end
+
+  test "associated dogs should be destroyed" do
+    @user.save
+    @user.dogs.create!(name: "dog_one", gender: 1, birthday: "20171115", hospital: "ABC病院", salon: "abcサロン", image_name: "#{@user.id}.jpg")
+    assert_difference 'Dog.count', -1 do
+      @user.destroy
+    end
+  end
 end
