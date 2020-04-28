@@ -4,9 +4,10 @@ one:
   name: "dog_one"
   gender: 1
   birthday: "20171115"
-  type: 
+  breed: 
   hospital: "ABC病院"
   salon: "abcサロン"
+  image_name: "1.jpg"
   user: michael
 
 two:

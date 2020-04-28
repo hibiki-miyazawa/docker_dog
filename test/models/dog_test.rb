@@ -4,7 +4,7 @@ class DogTest < ActiveSupport::TestCase
   
   def setup
     @user = users(:michael)
-    @dog = @user.dogs.build(name: "dog_one", gender: 1, birthday: "20171115", hospital: "ABC病院", salon: "abcサロン", image_name: "#{@user.id}.jpg")
+    @dog = @user.dogs.build(name: "dog_one", gender: "オス", birthday: "20171115", hospital: "ABC病院", salon: "abcサロン", image_name: "#{@user.id}.jpg")
   end
 
   test "should be valid" do
@@ -27,11 +27,11 @@ class DogTest < ActiveSupport::TestCase
   end
 
   test "type should be at most 25 characters" do
-    @dog.type = "a" * 26
+    @dog.breed = "a" * 26
     assert_not @dog.valid?
   end
 
-  test "sex should be 0 or 1 or nil" do
+  test "sex should be 1 or 2 or nil" do
     @dog.gender = "2"
     assert @dog.valid?
     @dog.gender = "3"

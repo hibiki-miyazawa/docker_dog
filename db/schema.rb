@@ -10,22 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_27_170830) do
+ActiveRecord::Schema.define(version: 2020_04_28_120348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "dogs", force: :cascade do |t|
     t.string "name"
-    t.integer "gender"
+    t.string "gender"
     t.date "birthday"
-    t.string "type"
+    t.string "breed"
     t.string "hospital"
     t.string "salon"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image_name"
+    t.string "color"
     t.index ["user_id"], name: "index_dogs_on_user_id"
   end
 

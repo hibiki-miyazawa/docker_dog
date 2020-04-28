@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'dogsnew', to: 'dogs#new'
+  post 'dogsnew', to: 'dogs#create'
+  resources :dogs
   root 'static_pages#home'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
