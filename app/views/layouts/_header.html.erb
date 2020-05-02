@@ -7,10 +7,10 @@
         <li><%= link_to "Help", help_path %></li>
         <% if logged_in? %>
           <li><%= link_to "Users", '#' %></li>
-          <li><%= link_to "UsersProfile", current_user %></li>
           <% if current_user.dogs.any? %>
-            <li><%= link_to "DogsProfile", '#' %></li>
+            <li><%= link_to "User&Dogs Profile", current_user %></li>
           <% else %>
+            <li><%= link_to "User Profile", current_user %></li>
             <li><%= link_to 'Add first dog information!!!', dogsnew_path %></li>
           <% end %>
           <li><%= link_to "Settings", '#' %></li>

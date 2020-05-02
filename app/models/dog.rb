@@ -5,6 +5,5 @@ class Dog < ApplicationRecord
   validates :breed, allow_blank: true, length: { maximum: 25}
   validates :hospital, presence: true
   validates :salon, presence: true
-  validates :image_name, presence: true
   mount_uploader :image_name, ImageUploader
 end

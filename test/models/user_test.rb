@@ -1,10 +1,12 @@
 require 'test_helper'
+include ActionDispatch::TestProcess
 
 class UserTest < ActiveSupport::TestCase
   
   def setup
     @user = User.new(name: "Example User", email: "user@example.com",
               password: "foobar", password_confirmation: "foobar")
+    @image_name = fixture_file_upload('test/fixtures/files/20200428110207.jpg', 'image/jpg')
   end
 
   test "should be valid" do
@@ -85,9 +87,10 @@ class UserTest < ActiveSupport::TestCase
 
   test "associated dogs should be destroyed" do
     @user.save
-    @user.dogs.create!(name: "dog_one", gender: 1, birthday: "20171115", hospital: "ABC病院", salon: "abcサロン", image_name: "#{@user.id}.jpg")
+    @user.dogs.create!(name: "dog_one", gender: "male", birthday: "2017-11-15", hospital: "ABChospital", salon: "abcsalon", image_name: @image_name)
     assert_difference 'Dog.count', -1 do
       @user.destroy
     end
   end
+
 end

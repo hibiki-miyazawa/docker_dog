@@ -7,6 +7,17 @@
                 <%= @user.name %>
             </h1>
         </section>
+        <section>
+            <% if @user.dogs.any? %>
+                <h1>Dogs</h1>
+                <ul>
+                    <%= render @dogs %>
+                </ul>
+                <h2><%= link_to "Add my dog", dogsnew_path %></h1>
+            <% else %>
+                <h1><%= link_to "Add first dog information!!!", dogsnew_path %></h1>
+            <% end %>
+        </section>
     </aside>
     <div>
         <% if @user.microposts.any? %>

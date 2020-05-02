@@ -1,10 +1,12 @@
 require 'test_helper'
+include ActionDispatch::TestProcess
 
 class DogTest < ActiveSupport::TestCase
   
   def setup
     @user = users(:michael)
-    @dog = @user.dogs.build(name: "dog_one", gender: "オス", birthday: "20171115", hospital: "ABC病院", salon: "abcサロン", image_name: "#{@user.id}.jpg")
+    @image_name = fixture_file_upload('test/fixtures/files/20200428110207.jpg', "image/jpg")
+    @dog = @user.dogs.build(name: "dog_one", gender: "male", birthday: 2017-11-15, hospital: "ABC病院", salon: "abcサロン", image_name: @image_name)
   end
 
   test "should be valid" do
@@ -26,16 +28,12 @@ class DogTest < ActiveSupport::TestCase
     assert_not @dog.valid?
   end
 
-  test "type should be at most 25 characters" do
+  test "breed should be at most 25 characters" do
     @dog.breed = "a" * 26
     assert_not @dog.valid?
   end
 
-  test "sex should be 1 or 2 or nil" do
-    @dog.gender = "2"
-    assert @dog.valid?
-    @dog.gender = "3"
-    assert_not @dog.valid?
+  test "gender should be allow nil" do
     @dog.gender = nil
     assert @dog.valid?
   end
@@ -47,11 +45,6 @@ class DogTest < ActiveSupport::TestCase
 
   test "salon should be present" do
     @dog.salon = " "
-    assert_not @dog.valid?
-  end
-
-  test "image name should be present" do
-    @dog.image_name = nil
     assert_not @dog.valid?
   end
 
