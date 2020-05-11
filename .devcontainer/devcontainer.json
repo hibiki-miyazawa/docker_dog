@@ -1,0 +1,19 @@
+{
+    "name": "Docker Dog Project",                                // 適当に名前をつける
+    "dockerComposeFile": [
+      "../docker-compose.yml",
+      "docker-compose.extend.yml"
+    ],
+    "service": "web",                                         // docker-compose.yml 中の web という service を使う想定
+    "workspaceFolder": "/",
+    "extensions": [
+      "rebornix.ruby"                                         // remote 中に使いたいエクステンションを指定できる
+    ],
+    "settings": {
+      "editor.tabSize": 2,
+      "files.insertFinalNewline": true,
+      "files.trimFinalNewlines": true,
+      "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "shutdownAction": "stopCompose"
+  }
