@@ -1,4 +1,4 @@
-require 'test_helper'
+require './test/test_helper'
 include ActionDispatch::TestProcess
 
 class DogsNewTest < ActionDispatch::IntegrationTest
@@ -33,6 +33,7 @@ class DogsNewTest < ActionDispatch::IntegrationTest
     end
     follow_redirect!
     assert_template 'dogs/show'
+    assert assigns(:dog).image_name
     assert_not flash.empty?
 
     get dogsnew_path
@@ -41,6 +42,8 @@ class DogsNewTest < ActionDispatch::IntegrationTest
     end
     follow_redirect!
     assert_template 'dogs/show'
+    assert_select "a[href=?]", '#'
+    assert_select "img[src=?]", '/default.jpg'
     assert_not flash.empty?
   end
 end

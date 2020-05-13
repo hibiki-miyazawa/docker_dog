@@ -28,6 +28,8 @@ services:
       - "26162:26162"
     depends_on:
       - db
+    stdin_open: true
+    tty: true
 
   pgadmin4:
     image: dpage/pgadmin4:latest
