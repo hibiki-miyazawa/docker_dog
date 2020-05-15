@@ -1,3 +1,8 @@
+require 'carrierwave/storage/abstract'
+require 'carrierwave/storage/file'
+require 'carrierwave/storage/fog'
+
+
 if Rails.env.production?
     CarrierWave.configure do |config|
         config.fog_provider = 'fog/aws'
@@ -9,4 +14,6 @@ if Rails.env.production?
         }
         config.fog_directory = ENV['S3_BUCKET']
     end
+
+    CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
 end
