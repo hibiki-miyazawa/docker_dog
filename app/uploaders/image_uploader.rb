@@ -6,6 +6,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Choose what kind of storage to use for this uploader:
   if Rails.env.production? 
     CarrierWave.configure do |config|
+      config.fog_provider = 'fog/aws'
       config.fog_credentials = {
         :provider => 'AWS',
         :region => ENV['S3_REGION'],
