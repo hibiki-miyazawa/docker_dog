@@ -46,7 +46,7 @@ services:
 
   webpack:
     <<: *app_base
-    command: bash -c "rm -rf /app/public/packs; ./bin/webpack-dev-server"
+    command: bash -c "rm -rf /app/public/packs && bundle exec rake webpacker:clobber && ./bin/webpack && ./bin/webpack-dev-server "
     ports:
       - 3035:3035
     depends_on:
