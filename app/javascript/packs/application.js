@@ -10,8 +10,8 @@ require("channels")
 require("jquery")
 require("bootstrap")
 
-import "bootstrap-material-design"
-import '../stylesheets/application.scss'
+import "bootstrap-material-design";
+import '../stylesheets/application.scss';
 
 import Rails from '@rails/ujs'
 Rails.start()
