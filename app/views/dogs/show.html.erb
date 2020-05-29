@@ -1,2 +1,38 @@
-<%= @dog.name %>
-<%= @dog.gender %>
+<%= provide(:title, @dog.name)%>
+<div>
+    <aside>
+        <section>
+            <h1>
+                <% if @dog.image_name.present? %>
+                <%= image_tag("#{@dog.image_name}", :size => '200x250') %>
+                <% else %>
+                <%= link_to image_tag("/default.jpg", :size => '200x250') %>
+                <% end %>
+                <%= @dog.name %>
+            </h1>
+        </section>
+    </aside>
+    <div>
+        <ul>
+            <% if @dog.gender.present? %>
+                <li>Gender <%= @dog.gender %></li>
+            <% else %>
+                <li>Gender secret</li>
+            <% end %>
+            <li>Birthday <%= @dog.birthday %></li>
+            <% if @dog.breed.present? %>
+                <li>Gender <%= @dog.breed %></li>
+            <% else %>
+                <li>Bleed secret</li>
+            <% end %>
+            <li>Hospital <%= @dog.hospital %></li>
+            <li>DogSalon <%= @dog.salon %></li>
+        </ul>
+    </div>
+    <div>
+        <% if current_user?(@dog.user) %>
+        <%= link_to "delete", @dog, method: :delete, data: {confirm: "You sure?"} %>
+        <% end %>
+    </div>
+</div>
+
