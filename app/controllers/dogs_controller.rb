@@ -1,6 +1,6 @@
 class DogsController < ApplicationController
-  before_action :logged_in_user, only:[:new]
-  before_action :correct_user, only:[:destroy]
+  before_action :logged_in_user, only:[:new, :edit, :update]
+  before_action :correct_user, only:[:destroy, :edit, :update]
   
   def new
     @dog = current_user.dogs.new
@@ -21,9 +21,27 @@ class DogsController < ApplicationController
   end
 
   def edit
+    @dog = Dog.find(params[:id])
   end
 
   def update
+    @dog = Dog.find(params[:id])
+    if params[:remove_image_name] == '1'
+      @dog.image_name = nil
+      if @dog.update_attributes(dog_params)
+        flash[:success] = "#{@dog.name}'s profile update."
+        redirect_to @dog
+      else
+        render 'edit'
+      end
+    else
+      if @dog.update_attributes(dog_params)
+        flash[:success] = "#{@dog.name}'s profile update."
+        redirect_to @dog
+      else
+        render 'edit'
+      end
+    end
   end
 
   def destroy
@@ -35,7 +53,7 @@ class DogsController < ApplicationController
   private
 
     def dog_params
-      params.require(:dog).permit(:name, :gender, :birthday, :breed, :hospital, :salon, :image_name)
+      params.require(:dog).permit(:name, :gender, :birthday, :breed, :hospital, :salon, :image_name, :remove_image_name)
     end
 
     def correct_user

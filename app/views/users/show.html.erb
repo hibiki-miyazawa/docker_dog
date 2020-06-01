@@ -14,9 +14,16 @@
             <ul>
                 <%= render @dogs %>
             </ul>
-            <h3><%= link_to "Add my dog", dogsnew_path %></h3>
-        <% else %>
+        <% end %>
+        <% if @user.dogs.any? && current_user?(@user) %>
+            <h5><%= link_to "Add my dog", dogsnew_path %></h5>
+        <% elsif !@user.dogs.any? && current_user?(@user) %>
             <h1><%= link_to "Add first dog information!!!", dogsnew_path %></h1>
+        <% end %>
+        <% if current_user.admin? && !current_user?(@user)%>
+        <%= link_to "delete user", @user, method: :delete, data: {confirm: "You sure?"} %>
+        <% elsif !current_user.admin? && current_user?(@user) %>
+        <%= link_to "delete user", @user, method: :delete, data: {confirm: "You sure?"} %>
         <% end %>
     </div>
     <div>

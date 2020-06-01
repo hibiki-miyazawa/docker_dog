@@ -32,6 +32,7 @@
     <div>
         <% if current_user?(@dog.user) %>
         <%= link_to "delete", @dog, method: :delete, data: {confirm: "You sure?"} %>
+        <%= link_to "Setting", edit_dog_path(@dog) %>
         <% end %>
     </div>
 </div>
