@@ -1,8 +1,8 @@
 <li>
     <% if dog.image_name.present? %>
-        <%= link_to image_tag("#{dog.image_name}", :size => '200x250'), dog_path(dog) %>
+        <%= link_to image_tag("#{dog.image_name}", :size => 200), dog_path(dog) %>
     <% else %>
-        <%= link_to image_tag("/default.jpg", :size => '200x250'), dog_path(dog) %>
+        <%= link_to image_tag("/default.jpg", :size => 200), dog_path(dog) %>
         <!-- <%= link_to dog.name, '#' %> -->
     <% end %>
     <span><%= dog.name %></span>
