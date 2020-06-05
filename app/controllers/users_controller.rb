@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only:[:destroy, :show, :edit]
+  before_action :logged_in_user, only:[:destroy, :show, :edit, :followers, :following]
   before_action :correct_user, only:[:destroy, :edit, :update]
 
   def new
@@ -48,6 +48,28 @@ class UsersController < ApplicationController
       redirect_to root_url
     end
   end
+
+  def following
+    @title = "Following"
+    @user  = User.find(params[:id])
+    @users = @user.following
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user  = User.find(params[:id])
+    @users = @user.followers
+    render 'show_follow'
+  end
+
+  def friends
+    @title = "Friends"
+    @user = User.find(params[:id])
+    @users = @user.followers.where(id:@user.following.ids)
+    render 'show_follow'
+  end
+
 
   private
 
