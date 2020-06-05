@@ -2,7 +2,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
-
+  
   # Choose what kind of storage to use for this uploader:
   if Rails.env.development? 
     storage :file
@@ -51,6 +51,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   process :resize_to_limit => [700, 700]
+  process :resize_to_fit => [300, 200]
 
   process :convert => 'jpg'
 
