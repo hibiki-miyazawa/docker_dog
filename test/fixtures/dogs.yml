@@ -1,0 +1,10 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+dog1:
+  name: shiro
+  birthday: 2019-10-19
+  hospital: ABC-hospital
+  salon: abc-salon
+  image_name: 20200428110207.jpg
+  user: michael
+

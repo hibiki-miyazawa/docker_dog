@@ -2,21 +2,14 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
-
+  
   # Choose what kind of storage to use for this uploader:
-  if Rails.env.production? 
-    CarrierWave.configure do |config|
-      config.fog_credentials = {
-        :provider => 'AWS',
-        :region => ENV['S3_REGION'],
-        :aws_access_key_id => ENV['S3_ACCESS_KEY'],
-        :aws_secret_access_key => ENV['S3_SECRET_KEY']
-      }
-      config.fog_directory = ENV['S3_BUCKET']
-    end 
-    storage :fog
-  else
+  if Rails.env.development? 
     storage :file
+  elsif Rails.env.test?
+    storage :file
+  else
+    storage :fog
   end
 
   # Override the directory where uploaded files will be stored.
@@ -26,12 +19,12 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
-  # def default_url(*args)
+  #def default_url(*args)
   #   # For Rails 3.1+ asset pipeline compatibility:
   #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-  #
+  #  "default.jpg"
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
-  # end
+  #end
 
   # Process files as they are uploaded:
   # process scale: [200, 300]
@@ -58,6 +51,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   process :resize_to_limit => [700, 700]
+  process :resize_to_fit => [500, 500]
 
   process :convert => 'jpg'
 

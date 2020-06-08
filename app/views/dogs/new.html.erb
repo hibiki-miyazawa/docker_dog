@@ -1,0 +1,33 @@
+<% provide(:title, 'DogsNew') %>
+<h1>Add Dog Information</h1>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <%= form_for(@dog, url: dogsnew_path) do |f| %>
+            <%= render 'shared/error_messages', object: f.object %>
+
+            <%= f.label :name %>
+            <%= f.text_field :name %>
+
+            <%= f.label :gender %>
+            <%= f.select :gender, [["male", "male"], ["female", "female"]], include_blank: "Please select" %>
+
+            <%= f.label :birthday %>
+            <%= f.date_select :birthday %>
+
+            <%= f.label :"Dog breed" %>
+            <%= f.text_field :breed %>
+
+            <%= f.label :hospital %>
+            <%= f.text_field :hospital %>
+
+            <%= f.label :"Dog Salon" %>
+            <%= f.text_field :salon %>
+
+            <%= f.label :"Dog's image" %>
+            <%= f.file_field :image_name %>
+            
+            <%= f.submit "Create my dog account", class: "btn" %>
+        <% end %>
+    </div>
+</div>

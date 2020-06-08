@@ -1,0 +1,52 @@
+version: '3'
+services:
+  web: &app_base
+    build: .
+    command: bundle exec rdebug-ide --debug --host 0.0.0.0 --port 1234 --dispatcher-port 26162 -- rails s -b 0.0.0.0
+    environment:
+      WEBPACKER_DEV_SERVER_HOST: webpack
+    volumes:
+      - .:/docker_dog
+      - /docker_dog/node_modules/
+    ports:
+      - "3000:3000"
+      - "1234:1234"
+      - "26162:26162"
+    depends_on:
+      - db
+
+  db:
+    image: postgres-data:1.2.1
+    container_name: db-container
+    volumes:
+      - ./tmp/postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: testdb
+    ports:
+      - 5433:5432
+
+  webpack:
+    <<: *app_base
+    command: bash -c "bin/webpack-dev-server"
+    ports:
+      - "3035:3035"
+    depends_on:
+      - web
+
+  pgadmin4:
+    image: dpage/pgadmin4:latest
+    volumes:
+      - ./pgadmin4:/var/lib/pgadmin
+    ports:
+      - "8000:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@example.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    depends_on:
+      - db
+    restart: always
+
+volumes:
+  pgadmin4:

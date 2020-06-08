@@ -1,17 +1,22 @@
-<header>
+<header class="navbar navbar-expand navbar-dark bg-dark fixed-top">
   <div class="container">
-    <%= link_to "Community for Dogs", root_path %>
+    <%= link_to "Community for Dogs", root_path, id: "logo" %>
     <nav>
-      <ul>
-        <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "Help", help_path %></li>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "Help", help_path, class: "nav-link" %></li>
         <% if logged_in? %>
-          <li><%= link_to "Users", '#' %></li>
-          <li><%= link_to "Profile", current_user %></li>
-          <li><%= link_to "Settings", '#' %></li>
-          <li><%= link_to "Log out", logout_path, method: :delete  %></li>
+         <li class="nav-item"><%= link_to "Friends", '#', class: "nav-link" %></li>
+          <% if current_user.dogs.any? %>
+            <li class="nav-item"><%= link_to "User&Dogs Profile", current_user, class: "nav-link" %></li>  
+          <% else %>
+            <li class="nav-item"><%= link_to "User Profile", current_user, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to 'Add first dog information!!!', dogsnew_path, class: "nav-link" %></li>
+          <% end %>
+         <li class="nav-item"><%= link_to "User Settings", edit_user_path(current_user), class: "nav-link" %></li>
+         <li class="nav-item"><%= link_to "Log out", logout_path, method: :delete, class: "nav-link" %></li>
         <% else %>
-          <li><%= link_to "Log in", login_path %></li>
+         <li class="nav-item"><%= link_to "Log in", login_path, class: "nav-link" %></li>
         <% end %>
       </ul>
     </nav>

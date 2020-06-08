@@ -1,0 +1,30 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach to Docker",
+            "type": "Ruby",
+            "request": "attach",
+            "remotePort": "1234",
+            "remoteHost": "0.0.0.0",
+            "remoteWorkspaceRoot": "/",
+            "cwd": "${workspaceRoot}",
+            "showDebuggerOutput": true
+        },
+        {
+            "name": "Debug Rails server",
+            "type": "Ruby",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "useBundler": true,
+            "pathToBundler": "/usr/local/bin/bundle",
+            "pathToRDebugIDE": "/bundle/gems/ruby-debug-ide-0.7.2/bin/rdebug-ide",
+            "program": "${workspaceRoot}/bin/rails",
+            "args": [
+                "server",
+                "-p", "3000",
+                "-b", "0.0.0.0"
+            ]
+        }
+    ]
+}

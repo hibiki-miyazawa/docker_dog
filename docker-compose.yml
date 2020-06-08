@@ -14,7 +14,9 @@ services:
 
   web: &app_base
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: >
+      bash -c "rm -f tmp/pids/server.pid && 
+      bundle exec rails s -p 3000 -b '0.0.0.0'" 
     environment:
       WEBPACKER_DEV_SERVER_HOST: webpack
     volumes:
@@ -22,8 +24,12 @@ services:
       - /docker_dog/node_modules/
     ports:
       - "3000:3000"
+      - "1234:1234"
+      - "26162:26162"
     depends_on:
       - db
+    stdin_open: true
+    tty: true
 
   pgadmin4:
     image: dpage/pgadmin4:latest
@@ -40,12 +46,11 @@ services:
 
   webpack:
     <<: *app_base
-    command: bash -c "bin/webpack-dev-server"
+    command: bash -c "rm -rf /app/public/packs && bundle exec rake webpacker:clobber && ./bin/webpack && ./bin/webpack-dev-server "
     ports:
-      - "3035:3035"
+      - 3035:3035
     depends_on:
       - web
     
 volumes:
   pgadmin4:
-

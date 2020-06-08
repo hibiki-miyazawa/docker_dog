@@ -1,10 +1,12 @@
 require 'test_helper'
+include ActionDispatch::TestProcess
 
 class UserTest < ActiveSupport::TestCase
   
   def setup
     @user = User.new(name: "Example User", email: "user@example.com",
               password: "foobar", password_confirmation: "foobar")
+    @image_name = fixture_file_upload('test/fixtures/files/20200428110207.jpg', 'image/jpg')
   end
 
   test "should be valid" do
@@ -82,4 +84,42 @@ class UserTest < ActiveSupport::TestCase
       @user.destroy
     end
   end
+
+  test "associated dogs should be destroyed" do
+    @user.save
+    @user.dogs.create!(name: "dog_one", gender: "male", birthday: "2017-11-15", hospital: "ABChospital", salon: "abcsalon", image_name: @image_name)
+    assert_difference 'Dog.count', -1 do
+      @user.destroy
+    end
+  end
+
+  test "should follow and unfollow a user" do
+    michael  = users(:michael)
+    archer   = users(:archer)
+    assert_not michael.following?(archer)
+    michael.follow(archer)
+    assert michael.following?(archer)
+    assert archer.followers.include?(michael)
+    michael.unfollow(archer)
+    assert_not michael.following?(archer)
+  end
+
+  test "feed should have the right posts" do
+    michael = users(:michael)
+    archer  = users(:archer)
+    lana    = users(:lana)
+    # フォローしているユーザーの投稿を確認
+    lana.microposts.each do |post_following|
+      assert michael.feed.include?(post_following)
+    end
+    # 自分自身の投稿を確認
+    michael.microposts.each do |post_self|
+      assert michael.feed.include?(post_self)
+    end
+    # フォローしていないユーザーの投稿を確認
+    archer.microposts.each do |post_unfollowed|
+      assert_not michael.feed.include?(post_unfollowed)
+    end
+  end
+
 end
