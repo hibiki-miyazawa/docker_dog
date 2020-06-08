@@ -24,6 +24,9 @@ class User < ApplicationRecord
 
     mount_uploader :image, ImageUploader
 
+    has_many :messages, dependent: :destroy
+    has_many :entries, dependent: :destroy
+
     def User.digest(string)
         cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
         BCrypt::Password.create(string, cost: cost)
@@ -53,7 +56,7 @@ class User < ApplicationRecord
 
     def follow(other_user)
         following << other_user
-      end
+    end
     
     # ユーザーをフォロー解除する
     def unfollow(other_user)
@@ -79,6 +82,10 @@ class User < ApplicationRecord
     # ユーザーをフォローする
     def follow(other_user)
       following << other_user
+    end
+
+    def followed_by?(other_user)
+        followers.include?(other_user)
     end
 
 end

@@ -7,13 +7,35 @@
                 <%= gravatar_for @user %>
                 <%= @user.name %>
             </h1>
+            <div>
+                <% unless @user.id == current_user.id %>
+                    <% if current_user.followed_by?(@user) && @user.followed_by?(current_user) %>
+                        <% if @isRoom == true %>
+                            <p class="user-show-room"><a href="/rooms/<%= @roomId %>" class="btn">message</a>
+                        <% else %>
+                            <%= form_for @room do |f| %>
+                                <%= fields_for @entry do |e| %>
+                                    <%= e.hidden_field :user_id, value: @user.id %>
+                                <% end %>
+                                <%= f.submit "send messages", class: "btn" %>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+            </div>
             <% if current_user.admin? && !current_user?(@user)%>
-            <%= link_to "delete user", @user, method: :delete, data: {confirm: "You sure?"} %>
+            <%= link_to "User Settings", edit_user_path(current_user) %>
+            <br>
+            <%= link_to "Delete user", @user, method: :delete, data: {confirm: "You sure?"} %>
             <% elsif !current_user.admin? && current_user?(@user) %>
-            <%= link_to "delete user", @user, method: :delete, data: {confirm: "You sure?"} %>
+            <%= link_to "User Settings", edit_user_path(current_user) %>
+            <br>
+            <%= link_to "Delete user", @user, method: :delete, data: {confirm: "You sure?"} %>
             <% end %>
         </section>
     </aside>
+    
+    
     <div class="w-100"></div>
     <div>
         <% if @user.dogs.any? %>
