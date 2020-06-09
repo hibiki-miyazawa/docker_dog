@@ -17,7 +17,7 @@
               <tr>
                 <td><%= user.name %></td>
                 <br>
-                <td><%= gravatar_for user %></td>
+                <td><%= link_to gravatar_for(user), user %></td>
                 <br>
                 <td><%= user.prefecture.name %></td>
               </tr>
