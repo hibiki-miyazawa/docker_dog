@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only:[:destroy, :show, :edit, :followers, :following]
+  before_action :logged_in_user, only:[:destroy, :show, :edit, :followers, :following, :search]
   before_action :correct_user, only:[:destroy, :edit, :update]
 
   def new
@@ -86,11 +86,19 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  def search
+    if params[:prefecture_id].present?
+      @users = User.where(prefecture_id: params[:prefecture_id])
+    else
+      @users = User.none
+    end
+  end
+
 
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :image)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :image, :prefecture_id)
     end
 
     def correct_user

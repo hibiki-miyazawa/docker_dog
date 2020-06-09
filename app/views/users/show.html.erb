@@ -4,8 +4,11 @@
     <aside class="col-md-4">
         <section>
             <h1>
-                <%= gravatar_for @user %>
                 <%= @user.name %>
+                <br>
+                <%= gravatar_for @user %>
+                <br>
+                <%= @user.prefecture.name %>
             </h1>
             <div>
                 <% unless @user.id == current_user.id %>

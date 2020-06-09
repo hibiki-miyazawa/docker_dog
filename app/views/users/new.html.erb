@@ -11,6 +11,9 @@
             <%= f.label :email %>
             <%= f.email_field :email %>
 
+            <%= f.label :prefecture_id %>
+            <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name, include_blank: '選択して下さい' %>
+
             <%= f.label :password %>
             <%= f.password_field :password %>
 

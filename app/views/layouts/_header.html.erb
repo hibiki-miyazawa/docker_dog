@@ -6,7 +6,8 @@
         <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
         <li class="nav-item"><%= link_to "Help", help_path, class: "nav-link" %></li>
         <% if logged_in? %>
-         <li class="nav-item"><%= link_to "Friends", '#', class: "nav-link" %></li>
+         <li class="nav-item"><%= link_to "Friends", friends_user_path(current_user), class: "nav-link" %></li>
+         <li class="nav-item"><%= link_to "Search Friends", user_search_path(current_user), class: "nav-link" %></li>
           <% if current_user.dogs.any? %>
             <li class="nav-item"><%= link_to "User&Dogs Profile", current_user, class: "nav-link" %></li>  
           <% else %>

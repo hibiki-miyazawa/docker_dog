@@ -1,0 +1,28 @@
+<% provide(:title, 'Search user') %>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <br>
+        <%= form_with url: user_search_path, method: :get, local: true do |f| %>
+            <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name, include_blank: '選択して下さい' %>
+            <%= f.submit :search %>
+        <% end %>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td><%= user.name %></td>
+                <br>
+                <td><%= gravatar_for user %></td>
+                <br>
+                <td><%= user.prefecture.name %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+    </div>
+</div>
