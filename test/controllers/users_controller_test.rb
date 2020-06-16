@@ -52,4 +52,25 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get followers_user_path(@user)
     assert_redirected_to login_url
   end
+
+  test "should redirect friends when not logged in" do
+    get friends_user_path(@user)
+    assert_redirected_to login_url
+  end
+
+  test "should redirect search friends when not logged in" do
+    get user_search_path(@user)
+    assert_redirected_to login_url
+  end
+
+  test "should redirect index when not logged in" do
+    get users_path
+    assert_redirected_to login_url
+  end
+
+  test "should redirect index when not admin" do
+    log_in_as(@other_user)
+    get users_path
+    assert_redirected_to root_url
+  end
 end

@@ -28,6 +28,16 @@ class FollowingTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "friends paga" do
+    get friends_user_path(@user)
+    assert_not @user.followers.empty?
+    assert_not @user.following.empty?
+    @users = @user.followers.where(id:@user.following.ids)
+    @users.each do |user|
+      assert_select "a[href=?]", user_path(user)
+    end
+  end 
+
   test "should follow a user the standard way" do
     assert_difference '@user.following.count', 1 do
       post relationships_path, params: { followed_id: @other.id }

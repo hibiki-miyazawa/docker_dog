@@ -1,33 +1,36 @@
-<h4 class="room-title">Friend</h4>
-<% @entries.each do |e| %>
-    <div class="user-name">
-    <strong>
-            <%= gravatar_for e.user %>
-            <a class="rooms-user-link" href="/users/<%= e.user.id %>">
-                <%= e.user.name %>
-            </a>
-    </strong>
-    </div>
-<% end %>
-<hr>
-<div class="chat">
-    <% if @messages.present? %>
-        <% @messages.each do |m| %>
-            <div class="chat-box">
-                <div class="chat-face">
-                    <%= gravatar_for m.user %>
+<% provide(:title, "Room") %>
+<div>
+    <h4 class="room-title">Friend</h4>
+    <% @entries.each do |e| %>
+        <div class="user-name">
+        <strong>
+                <%= gravatar_for e.user %>
+                <a class="rooms-user-link" href="/users/<%= e.user.id %>">
+                    <%= e.user.name %>
+                </a>
+        </strong>
+        </div>
+    <% end %>
+    <hr>
+    <div class="chat">
+        <% if @messages.present? %>
+            <% @messages.each do |m| %>
+                <div class="chat-box">
+                    <div class="chat-face">
+                        <%= gravatar_for m.user %>
+                    </div>
+                    <div class="chat-hukidashi"> <strong><%= m.message %></strong> <br>
+                        <%= m.created_at.strftime("%Y-%m-%d %H:%M")%>
+                    </div>
                 </div>
-                <div class="chat-hukidashi"> <strong><%= m.message %></strong> <br>
-                    <%= m.created_at.strftime("%Y-%m-%d %H:%M")%>
-                </div>
-            </div>
+            <% end %>
         <% end %>
-    <% end %>
-</div>
-<div class="posts">
-    <%= form_for(@message) do |f| %>
-        <%= f.text_area :message, placeholder: "Please enter your message..." , size: 70, class:"form-text-field" %>
-        <%= f.hidden_field :room_id, value: @room.id %>
-        <%= f.submit "Send", class: 'form-submit' %>
-    <% end %>
+    </div>
+    <div class="col-md-6 col-md-offset-3">
+        <%= form_for(@message) do |f| %>
+            <%= f.text_area :message, placeholder: "Please enter your message..." , size: 70, class:"form-text-field" %>
+            <%= f.hidden_field :room_id, value: @room.id %>
+            <%= f.submit "Send", class: 'form-submit' 'btn' %>
+        <% end %>
+    </div>
 </div>

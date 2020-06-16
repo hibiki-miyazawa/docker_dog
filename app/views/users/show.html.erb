@@ -10,22 +10,29 @@
                 <br>
                 <%= @user.prefecture.name %>
             </h1>
+        </section>
+        <section class="stats">
+            <%= render 'shared/stats' %>
+        </section>
+        <section>
             <div>
                 <% unless @user.id == current_user.id %>
                     <% if current_user.followed_by?(@user) && @user.followed_by?(current_user) %>
                         <% if @isRoom == true %>
-                            <p class="user-show-room"><a href="/rooms/<%= @roomId %>" class="btn">message</a>
+                            <p class="user-show-room"><a href="/rooms/<%= @roomId %>" class="btn">DM</a>
                         <% else %>
                             <%= form_for @room do |f| %>
                                 <%= fields_for @entry do |e| %>
                                     <%= e.hidden_field :user_id, value: @user.id %>
                                 <% end %>
-                                <%= f.submit "send messages", class: "btn" %>
+                                <%= f.submit "Direct Message", class: "btn" %>
                             <% end %>
                         <% end %>
                     <% end %>
                 <% end %>
             </div>
+        </section>
+        <section>
             <% if current_user.admin? && !current_user?(@user)%>
             <%= link_to "User Settings", edit_user_path(current_user) %>
             <br>

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only:[:destroy, :show, :edit, :followers, :following, :search]
+  before_action :logged_in_user, only:[:destroy, :show, :edit, :followers, :following, :friends, :search, :index]
   before_action :correct_user, only:[:destroy, :edit, :update]
+  before_action :admin_user, only:[:index]
 
   def new
     @user = User.new
@@ -65,6 +66,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def index
+    @users = User.all
+  end
+
   def following
     @title = "Following"
     @user  = User.find(params[:id])
@@ -106,5 +111,9 @@ class UsersController < ApplicationController
       if !current_user.admin? && !current_user?(@user)
         redirect_to(root_url)
       end
+    end
+
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
     end
 end

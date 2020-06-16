@@ -1,11 +1,13 @@
 <% @user ||= current_user %>
 <div class="stats">
-  <a href="<%= friends_user_path(@user) %>">
-    <strong id="friends" class="stat">
-      <%= @user.followers.where(id:@user.following.ids).count %>
-    </strong>
-    friends
-  </a>
+  <% if @user == current_user %>
+    <a href="<%= friends_user_path(@user) %>">
+      <strong id="friends" class="stat">
+        <%= @user.followers.where(id:@user.following.ids).count %>
+      </strong>
+      friends
+    </a>
+  <% end %>
   <a href="<%= following_user_path(@user) %>">
     <strong id="following" class="stat">
       <%= @user.following.count %>
