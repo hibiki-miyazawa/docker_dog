@@ -64,7 +64,7 @@
         <%= render 'follow_form' if logged_in? %>
         <% if @user.microposts.any? %>
         <h3>投稿(<%= @user.microposts.count %>)</h3>
-        <ol class="microposts">
+        <ol class="microposts scroll height-fixed">
             <%= render @microposts %>
         </ol>
         <% end %>

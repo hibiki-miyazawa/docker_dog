@@ -293,6 +293,14 @@ input {
   }
 }
 
+.scroll {
+  overflow-y: auto;
+}
+
+.height-fixed {
+  height: 95vh;
+}
+
 aside {
   textarea {
     height: 100px;
