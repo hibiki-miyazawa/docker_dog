@@ -1,4 +1,4 @@
-<header class="navbar navbar-expand navbar-dark bg-dark fixed-top">
+<header class="navbar navbar-expand navbar-dark fixed-top" style="background-color: green">
   <div class="container">
     <%= link_to "Community for Dogs", root_path, id: "logo" %>
     <nav>
@@ -14,7 +14,6 @@
              <li class="nav-item"><%= link_to "My family", current_user, class: "nav-link" %></li>  
            <% else %>
              <li class="nav-item"><%= link_to "My Profile", current_user, class: "nav-link" %></li>
-             <li class="nav-item"><%= link_to 'Add first dog information!!!', dogsnew_path, class: "nav-link" %></li>
            <% end %>
           <li class="nav-item"><%= link_to "User Settings", edit_user_path(current_user), class: "nav-link" %></li>
           <li class="nav-item"><%= link_to "Log out", logout_path, method: :delete, class: "nav-link" %></li>

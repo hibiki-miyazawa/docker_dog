@@ -1,65 +1,65 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-    
     <aside class="col-md-4">
-        <section>
-            <h1>
-                <%= @user.name %>
-                <br>
-                <%= gravatar_for @user %>
-                <br>
-                <%= @user.prefecture.name %>
-            </h1>
-        </section>
-        <section class="stats">
-            <%= render 'shared/stats' %>
-        </section>
-        <section>
-            <div>
-                <% unless @user.id == current_user.id %>
-                    <% if current_user.followed_by?(@user) && @user.followed_by?(current_user) %>
-                        <% if @isRoom == true %>
-                            <p class="user-show-room"><a href="/rooms/<%= @roomId %>" class="btn">DM</a>
-                        <% else %>
-                            <%= form_for @room do |f| %>
-                                <%= fields_for @entry do |e| %>
-                                    <%= e.hidden_field :user_id, value: @user.id %>
+        <aside class="jumbotron">
+            <section>
+                <h1>
+                    <%= @user.name %>
+                    <br>
+                    <%= gravatar_for @user %>
+                    <br>
+                    <%= @user.prefecture.name %>
+                </h1>
+            </section>
+            <section class="stats">
+                <%= render 'shared/stats' %>
+            </section>
+            <section>
+                <div>
+                    <% unless @user.id == current_user.id %>
+                        <% if current_user.followed_by?(@user) && @user.followed_by?(current_user) %>
+                            <% if @isRoom == true %>
+                                <p class="user-show-room"><a href="/rooms/<%= @roomId %>" class="btn btn-outline-success">DM</a>
+                            <% else %>
+                                <%= form_for @room do |f| %>
+                                    <%= fields_for @entry do |e| %>
+                                        <%= e.hidden_field :user_id, value: @user.id %>
+                                    <% end %>
+                                    <%= f.submit "Direct Message", class: "btn btn-outline-success" %>
                                 <% end %>
-                                <%= f.submit "Direct Message", class: "btn" %>
                             <% end %>
                         <% end %>
                     <% end %>
+                </div>
+            </section>
+            <section>
+                <% if current_user.admin? && !current_user?(@user)%>
+                <%= link_to "User Settings", edit_user_path(current_user) %>
+                <br>
+                <%= link_to "Delete User", @user, method: :delete, data: {confirm: "You sure?"} %>
+                <% elsif !current_user.admin? && current_user?(@user) %>
+                <%= link_to "User Settings", edit_user_path(current_user), class: "btn btn-outline-success" %>
                 <% end %>
-            </div>
-        </section>
-        <section>
-            <% if current_user.admin? && !current_user?(@user)%>
-            <%= link_to "User Settings", edit_user_path(current_user) %>
+            </section>
+        </aside>
+    
+    
+        <div class="w-100"></div>
+        <h3>Dogs</h3>
+        <section class="jumbotron">
+            <% if @user.dogs.any? %>
+                <ul class="dogs">
+                    <%= render @dogs %>
+                </ul>
+            <% end %>
             <br>
-            <%= link_to "Delete user", @user, method: :delete, data: {confirm: "You sure?"} %>
-            <% elsif !current_user.admin? && current_user?(@user) %>
-            <%= link_to "User Settings", edit_user_path(current_user) %>
-            <br>
-            <%= link_to "Delete user", @user, method: :delete, data: {confirm: "You sure?"} %>
+            <% if @user.dogs.any? && current_user?(@user) %>
+                <h5><%= link_to "Add my dog", dogsnew_path, class: "btn btn-outline-success" %></h5>
+            <% elsif !@user.dogs.any? && current_user?(@user) %>
+                <h4><%= link_to "Add first dog information!!!", dogsnew_path, class: "btn btn-outline-success" %></h4>
             <% end %>
         </section>
     </aside>
-    
-    
-    <div class="w-100"></div>
-    <div>
-        <% if @user.dogs.any? %>
-            <h3>Dogs</h3>
-            <ul class="dogs">
-                <%= render @dogs %>
-            </ul>
-        <% end %>
-        <% if @user.dogs.any? && current_user?(@user) %>
-            <h5><%= link_to "Add my dog", dogsnew_path %></h5>
-        <% elsif !@user.dogs.any? && current_user?(@user) %>
-            <h4><%= link_to "Add first dog information!!!", dogsnew_path %></h4>
-        <% end %>
-    </div>
     <div class="col-md-8">
         <%= render 'follow_form' if logged_in? %>
         <% if @user.microposts.any? %>

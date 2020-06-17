@@ -158,6 +158,9 @@ aside {
 
 .gravatar_edit {
   margin-top: 15px;
+  a {
+    color: green;
+  }
 }
 
 .stats {
@@ -285,6 +288,9 @@ input {
     margin-right: 10px;
     margin-top: 5px;
   }
+  .delete {
+    color: green;
+  }
 }
 
 aside {
@@ -310,4 +316,14 @@ span.picture {
     padding: 10px 0;
     border-bottom: 1px solid $gray-300;
   }
+  img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover; /* この一行を追加するだけ！ */
+  }
+}
+
+/*body*/
+.color {
+  color: green;
 }

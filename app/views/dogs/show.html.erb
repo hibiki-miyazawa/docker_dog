@@ -1,41 +1,40 @@
 <%= provide(:title, @dog.name)%>
 <div class="row">
-    <aside class="col-md-4">
+    <aside class="col-md-5 jumbotron">
         <section>
-            <h1>
-                <%= @dog.name %>
-                <% if @dog.image_name.present? %>
+            <h1><%= @dog.name %></h1>
+            <br>
+            <% if @dog.image_name.present? %>
                 <%= image_tag("#{@dog.image_name}", :size => '200x250') %>
-                <% else %>
+            <% else %>
                 <%= link_to image_tag("/default.jpg", :size => '200x250') %>
-                <% end %>
-            </h1>
+            <% end %>
         </section>
+        <section>
+            <ul>
+                <% if @dog.gender.present? %>
+                    <li>Gender <%= @dog.gender %></li>
+                <% else %>
+                    <li>Gender secret</li>
+                <% end %>
+                <li>Birthday <%= @dog.birthday %></li>
+                <% if @dog.breed.present? %>
+                    <li>Gender <%= @dog.breed %></li>
+                <% else %>
+                    <li>Bleed secret</li>
+                <% end %>
+                <li>Hospital <%= @dog.hospital %></li>
+                <li>DogSalon <%= @dog.salon %></li>
+            </ul>
+        </section>
+        
+        <div>
+            <% if current_user?(@dog.user) %>
+            <%= link_to "Dog Setting", edit_dog_path(@dog), class: "btn btn-outline-success" %>
+            
+            <%= link_to "Delete Dog", @dog, method: :delete, data: {confirm: "You sure?"}, class: "btn btn-outline-success" %>
+            <% end %> 
+        </div>
     </aside>
-    <div class="w-100"></div>
-    <div class="col-md-8">
-        <ul>
-            <% if @dog.gender.present? %>
-                <li>Gender <%= @dog.gender %></li>
-            <% else %>
-                <li>Gender secret</li>
-            <% end %>
-            <li>Birthday <%= @dog.birthday %></li>
-            <% if @dog.breed.present? %>
-                <li>Gender <%= @dog.breed %></li>
-            <% else %>
-                <li>Bleed secret</li>
-            <% end %>
-            <li>Hospital <%= @dog.hospital %></li>
-            <li>DogSalon <%= @dog.salon %></li>
-        </ul>
-    </div>
-    <div class="w-100"></div>
-    <div>
-        <% if current_user?(@dog.user) %>
-        <%= link_to "delete", @dog, method: :delete, data: {confirm: "You sure?"} %>
-        <%= link_to "Setting", edit_dog_path(@dog) %>
-        <% end %>
-    </div>
 </div>
 

@@ -9,7 +9,9 @@
         <table>
           <thead>
             <tr>
-              <th>Name</th>
+            <% if @prefecture.present? %>
+                <th><%= @prefecture.name %></th>
+            <% end %>
             </tr>
           </thead>
           <tbody>
@@ -18,8 +20,6 @@
                 <td><%= user.name %></td>
                 <br>
                 <td><%= link_to gravatar_for(user), user %></td>
-                <br>
-                <td><%= user.prefecture.name %></td>
               </tr>
             <% end %>
           </tbody>
