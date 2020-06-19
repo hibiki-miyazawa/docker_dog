@@ -1,10 +1,41 @@
 <% provide(:title, 'Search user') %>
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <aside class="col-md-4">
+        <h3>ユーザー</h3>
+        <aside class="jumbotron">
+            <section>
+                <%= render 'shared/user_info'%>
+            </section>
+            <section class="stats">
+                <%= render 'shared/stats' %>
+            </section>
+            <section>
+                <%= render 'users/message' %>
+            </section>
+            <section>
+                <% if current_user.admin? && !current_user?(@user)%>
+                <%= link_to "変更", edit_user_path(current_user) %>
+                <br>
+                <%= link_to "Delete User", @user, method: :delete, data: {confirm: "You sure?"} %>
+                <% elsif !current_user.admin? && current_user?(@user) %>
+                <%= link_to "編集", edit_user_path(current_user), class: "btn btn-outline-success" %>
+                <% end %>
+            </section>
+        </aside>
+    
+    
+        <div class="w-100"></div>
+        <h3>わんちゃん</h3>
+        <section class="jumbotron">
+            <%= render 'shared/dog_info' %>
+        </section>
+    </aside>
+    <div class="col-md-8">
+        <h1>友達検索</h1>
         <br>
         <%= form_with url: user_search_path, method: :get, local: true do |f| %>
             <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name, include_blank: '選択して下さい' %>
-            <%= f.submit :search %>
+            <%= f.submit :検索, class: "btn btn-success" %>
         <% end %>
         <table>
           <thead>
@@ -14,7 +45,7 @@
             <% end %>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="scroll">
             <% @users.each do |user| %>
               <tr>
                 <td><%= user.name %></td>

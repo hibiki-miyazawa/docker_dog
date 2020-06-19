@@ -72,6 +72,7 @@ class UsersController < ApplicationController
 
   def following
     @title = "Following"
+    @page = "フォロー"
     @user  = User.find(params[:id])
     @users = @user.following
     render 'show_follow'
@@ -79,6 +80,7 @@ class UsersController < ApplicationController
 
   def followers
     @title = "Followers"
+    @page = "フォロワー"
     @user  = User.find(params[:id])
     @users = @user.followers
     render 'show_follow'
@@ -86,12 +88,18 @@ class UsersController < ApplicationController
 
   def friends
     @title = "Friends"
+    @page = "友達"
     @user = User.find(params[:id])
     @users = @user.followers.where(id:@user.following.ids)
     render 'show_follow'
   end
 
   def search
+    @user = current_user
+    @microposts = @user.microposts
+    @dogs = @user.dogs
+    @currentUserEntry = Entry.where(user_id: current_user.id)
+    @userEntry = Entry.where(user_id: @user.id)
     if params[:prefecture_id].present?
       @users = User.where(prefecture_id: params[:prefecture_id])
       @prefecture = Prefecture.find_by(id: params[:prefecture_id])

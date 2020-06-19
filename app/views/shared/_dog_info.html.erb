@@ -1,0 +1,11 @@
+<% if @user.dogs.any? %>
+    <ul class="dogs">
+        <%= render @dogs %>
+    </ul>
+<% end %>
+<br>
+<% if @user.dogs.any? && current_user?(@user) %>
+    <h5><%= link_to "追加", dogsnew_path, class: "btn btn-outline-success" %></h5>
+<% elsif !@user.dogs.any? && current_user?(@user) %>
+    <h4><%= link_to "最初のわんちゃんを登録しよう", dogsnew_path, class: "btn btn-outline-success" %></h4>
+<% end %>

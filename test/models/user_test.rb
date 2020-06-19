@@ -5,7 +5,7 @@ class UserTest < ActiveSupport::TestCase
   
   def setup
     @user = User.new(name: "Example User", email: "user@example.com",
-              password: "foobar", password_confirmation: "foobar")
+              password: "foobar", password_confirmation: "foobar", prefecture_id: 0)
     @image_name = fixture_file_upload('test/fixtures/files/20200428110207.jpg', 'image/jpg')
   end
 

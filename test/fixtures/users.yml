@@ -12,6 +12,7 @@ archer:
   name: Sterling Archer
   email: archer@example.co.jp
   password_digest: <%= User.digest('password') %>
+  prefecture_id: 1
 
 lana:
   id: 2
@@ -19,4 +20,10 @@ lana:
   email: Lanak@example.gov
   password_digest: <%= User.digest('password') %>
   prefecture_id: 0
+
+malory:
+  name: Malory Archer
+  email: boss@example.gov
+  password_digest: <%= User.digest('password') %>
+  prefecture_id: 1
   

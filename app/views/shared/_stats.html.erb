@@ -5,19 +5,19 @@
       <strong id="friends" class="stat">
         <%= @user.followers.where(id:@user.following.ids).count %>
       </strong>
-      friends
+      友達
     </a>
   <% end %>
   <a href="<%= following_user_path(@user) %>">
     <strong id="following" class="stat">
       <%= @user.following.count %>
     </strong>
-    following
+    フォロー
   </a>
   <a href="<%= followers_user_path(@user) %>">
     <strong id="followers" class="stat">
       <%= @user.followers.count %>
     </strong>
-    followers
+    フォロワー
   </a>
 </div>

@@ -1,8 +1,8 @@
 <% provide(:title, 'Index') %>
 
-<h1>All User</h1>
+<h1>全ユーザー</h1>
 
-<ul class="users">
+<ul class="users scroll">
   <% @users.each do |user| %>
     <%= render user %>
   <% end %>

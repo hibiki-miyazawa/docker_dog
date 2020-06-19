@@ -1,10 +1,8 @@
 <% provide(:title, @title) %>
 <div class="row">
-  <aside class="col-md-4">
+  <aside class="col-md-4 jumbotron">
     <section class="user_info">
-      <%= link_to gravatar_for(@user), @user %>
-      <h1><%= @user.name %></h1>
-      <span><b>Microposts:</b> <%= @user.microposts.count %></span>
+      <%= render 'shared/user_info' %>
     </section>
     <section class="stats">
       <%= render 'shared/stats' %>
@@ -18,9 +16,9 @@
     </section>
   </aside>
   <div class="col-md-8">
-    <h3><%= @title %></h3>
+    <h3><%= @page %></h3>
     <% if @users.any? %>
-      <ul class="users follow">
+      <ul class="users follow scroll">
         <% @users.each do |user| %>
           <li>
             <%= link_to gravatar_for(user, size: 50), user %>

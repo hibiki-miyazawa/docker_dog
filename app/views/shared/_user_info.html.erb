@@ -1,1 +1,4 @@
-<%= link_to gravatar_for(current_user, size: 50), current_user %>
+<%= link_to gravatar_for(@user), @user %>
+<h1><%= @user.name %></h1>
+<span><%= @user.prefecture.name %></span>
+<span><b>投稿:</b> <%= @user.microposts.count %></span>

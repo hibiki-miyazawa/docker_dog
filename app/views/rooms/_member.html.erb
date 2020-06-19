@@ -1,0 +1,11 @@
+<h4 class="room-title">メンバー</h4>
+<% @entries.each do |e| %>
+    <div class="user-name">
+    <strong>
+        <%= gravatar_for e.user %>
+        <a class="rooms-user-link color" href="/users/<%= e.user.id %>">
+            <%= e.user.name %>
+        </a>
+    </strong>
+    </div>
+<% end %>

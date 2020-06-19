@@ -13,26 +13,26 @@
         <section>
             <ul>
                 <% if @dog.gender.present? %>
-                    <li>Gender <%= @dog.gender %></li>
+                    <li>性別 : <%= @dog.gender %></li>
                 <% else %>
-                    <li>Gender secret</li>
+                    <li>性別 : 秘密</li>
                 <% end %>
-                <li>Birthday <%= @dog.birthday %></li>
+                <li>誕生日 : <%= @dog.birthday %></li>
                 <% if @dog.breed.present? %>
-                    <li>Gender <%= @dog.breed %></li>
+                    <li>犬種 : <%= @dog.breed %></li>
                 <% else %>
-                    <li>Bleed secret</li>
+                    <li>犬種 : 秘密</li>
                 <% end %>
-                <li>Hospital <%= @dog.hospital %></li>
-                <li>DogSalon <%= @dog.salon %></li>
+                <li>病院 : <%= @dog.hospital %></li>
+                <li>ドッグサロン : <%= @dog.salon %></li>
             </ul>
         </section>
         
         <div>
             <% if current_user?(@dog.user) %>
-            <%= link_to "Dog Setting", edit_dog_path(@dog), class: "btn btn-outline-success" %>
+            <%= link_to "編集", edit_dog_path(@dog), class: "btn btn-outline-success" %>
             
-            <%= link_to "Delete Dog", @dog, method: :delete, data: {confirm: "You sure?"}, class: "btn btn-outline-success" %>
+            <%= link_to "削除", @dog, method: :delete, data: {confirm: "You sure?"}, class: "btn btn-outline-success" %>
             <% end %> 
         </div>
     </aside>
