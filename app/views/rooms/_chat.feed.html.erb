@@ -1,0 +1,12 @@
+<% if @messages.present? %>
+    <% @messages.each do |m| %>
+        <div class="chat-box">
+            <div class="chat-face">
+                <%= gravatar_for m.user %>
+            </div>
+            <div class="chat-hukidashi"> <strong><%= m.message %></strong> <br>
+                <%= m.created_at.strftime("%Y-%m-%d %H:%M")%>
+            </div>
+        </div>
+    <% end %>
+<% end %>

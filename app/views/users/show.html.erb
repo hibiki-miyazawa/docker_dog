@@ -1,60 +1,40 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-    
     <aside class="col-md-4">
-        <section>
-            <h1>
-                <%= gravatar_for @user %>
-                <%= @user.name %>
-            </h1>
-            <div>
-                <% unless @user.id == current_user.id %>
-                    <% if current_user.followed_by?(@user) && @user.followed_by?(current_user) %>
-                        <% if @isRoom == true %>
-                            <p class="user-show-room"><a href="/rooms/<%= @roomId %>" class="btn">message</a>
-                        <% else %>
-                            <%= form_for @room do |f| %>
-                                <%= fields_for @entry do |e| %>
-                                    <%= e.hidden_field :user_id, value: @user.id %>
-                                <% end %>
-                                <%= f.submit "send messages", class: "btn" %>
-                            <% end %>
-                        <% end %>
-                    <% end %>
+        <h3>ユーザー</h3>
+        <aside class="jumbotron">
+            <section>
+                <%= render 'shared/user_info'%>
+            </section>
+            <section class="stats">
+                <%= render 'shared/stats' %>
+            </section>
+            <section>
+                <%= render 'users/message' %>
+            </section>
+            <section>
+                <% if current_user.admin? && !current_user?(@user)%>
+                <%= link_to "変更", edit_user_path(current_user) %>
+                <br>
+                <%= link_to "Delete User", @user, method: :delete, data: {confirm: "You sure?"} %>
+                <% elsif !current_user.admin? && current_user?(@user) %>
+                <%= link_to "編集", edit_user_path(current_user), class: "btn btn-outline-success" %>
                 <% end %>
-            </div>
-            <% if current_user.admin? && !current_user?(@user)%>
-            <%= link_to "User Settings", edit_user_path(current_user) %>
-            <br>
-            <%= link_to "Delete user", @user, method: :delete, data: {confirm: "You sure?"} %>
-            <% elsif !current_user.admin? && current_user?(@user) %>
-            <%= link_to "User Settings", edit_user_path(current_user) %>
-            <br>
-            <%= link_to "Delete user", @user, method: :delete, data: {confirm: "You sure?"} %>
-            <% end %>
-        </section>
+            </section>
+        </aside>
+    
+    
+        <div class="w-100"></div>
+        <h3>わんちゃん</h3>
+        <aside class="jumbotron">
+            <%= render 'shared/dog_info' %>
+        </aside>
     </aside>
-    
-    
-    <div class="w-100"></div>
-    <div>
-        <% if @user.dogs.any? %>
-            <h3>Dogs</h3>
-            <ul class="dogs">
-                <%= render @dogs %>
-            </ul>
-        <% end %>
-        <% if @user.dogs.any? && current_user?(@user) %>
-            <h5><%= link_to "Add my dog", dogsnew_path %></h5>
-        <% elsif !@user.dogs.any? && current_user?(@user) %>
-            <h4><%= link_to "Add first dog information!!!", dogsnew_path %></h4>
-        <% end %>
-    </div>
     <div class="col-md-8">
         <%= render 'follow_form' if logged_in? %>
         <% if @user.microposts.any? %>
         <h3>投稿(<%= @user.microposts.count %>)</h3>
-        <ol class="microposts">
+        <ol class="microposts scroll height-fixed">
             <%= render @microposts %>
         </ol>
         <% end %>

@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.0'
 
+gem 'seed-fu'
+gem 'active_hash'
 gem 'pry-rails'
 gem 'pry-byebug'
 gem 'ruby-debug-ide'

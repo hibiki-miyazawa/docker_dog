@@ -14,7 +14,7 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     get user_path(@non_admin)
     assert_template 'users/show'
-    assert_select 'a[href=?]', user_path(@non_admin), text: 'delete user'
+    assert_select 'a[href=?]', user_path(@non_admin), text: 'Delete User'
     assert_difference 'User.count', -1 do
       delete user_path(@non_admin)
     end
@@ -24,7 +24,7 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     log_in_as(@non_admin)
     get user_path(@non_admin)
     assert_template 'users/show'
-    assert_select 'a[href=?]', user_path(@non_admin), text: 'delete user'
+    assert_select 'a[href=?]', edit_user_path(@non_admin), text: 'User Settings'
     assert_difference 'User.count', -1 do
       delete user_path(@non_admin)
     end
@@ -34,7 +34,7 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     get user_path(@user)
     assert_template 'users/show'
-    assert_select 'a[href=?]', user_path(@user), text: 'delete user', count: 0
+    assert_select 'a[href=?]', user_path(@user), text: 'Delete User', count: 0
     assert_no_difference 'User.count' do
       delete user_path(@user)
     end
@@ -47,7 +47,7 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     log_in_as(@non_admin)
     get user_path(@user)
     assert_template 'users/show'
-    assert_select 'a[href=?]', user_path(@user), text: 'delete user', count: 0
+    assert_select 'a[href=?]', user_path(@user), text: 'Delete User', count: 0
     assert_no_difference 'User.count' do
       delete user_path(@user)
     end

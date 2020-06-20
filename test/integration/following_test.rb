@@ -1,9 +1,6 @@
 require 'test_helper'
 
 class FollowingTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
   def setup
     @user = users(:michael)
     @other = users(:archer)
@@ -27,6 +24,16 @@ class FollowingTest < ActionDispatch::IntegrationTest
       assert_select "a[href=?]", user_path(user)
     end
   end
+
+  test "friends paga" do
+    get friends_user_path(@user)
+    assert_not @user.followers.empty?
+    assert_not @user.following.empty?
+    @users = @user.followers.where(id:@user.following.ids)
+    @users.each do |user|
+      assert_select "a[href=?]", user_path(user)
+    end
+  end 
 
   test "should follow a user the standard way" do
     assert_difference '@user.following.count', 1 do

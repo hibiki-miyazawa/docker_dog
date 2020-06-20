@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only:[:destroy, :show, :edit, :followers, :following]
+  before_action :logged_in_user, only:[:destroy, :show, :edit, :followers, :following, :friends, :search, :index]
   before_action :correct_user, only:[:destroy, :edit, :update]
+  before_action :admin_user, only:[:index]
 
   def new
     @user = User.new
@@ -65,8 +66,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def index
+    @users = User.all
+  end
+
   def following
     @title = "Following"
+    @page = "フォロー"
     @user  = User.find(params[:id])
     @users = @user.following
     render 'show_follow'
@@ -74,6 +80,7 @@ class UsersController < ApplicationController
 
   def followers
     @title = "Followers"
+    @page = "フォロワー"
     @user  = User.find(params[:id])
     @users = @user.followers
     render 'show_follow'
@@ -81,16 +88,31 @@ class UsersController < ApplicationController
 
   def friends
     @title = "Friends"
+    @page = "友達"
     @user = User.find(params[:id])
     @users = @user.followers.where(id:@user.following.ids)
     render 'show_follow'
+  end
+
+  def search
+    @user = current_user
+    @microposts = @user.microposts
+    @dogs = @user.dogs
+    @currentUserEntry = Entry.where(user_id: current_user.id)
+    @userEntry = Entry.where(user_id: @user.id)
+    if params[:prefecture_id].present?
+      @users = User.where(prefecture_id: params[:prefecture_id])
+      @prefecture = Prefecture.find_by(id: params[:prefecture_id])
+    else
+      @users = User.none
+    end
   end
 
 
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :image)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :image, :prefecture_id)
     end
 
     def correct_user
@@ -98,5 +120,9 @@ class UsersController < ApplicationController
       if !current_user.admin? && !current_user?(@user)
         redirect_to(root_url)
       end
+    end
+
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
     end
 end

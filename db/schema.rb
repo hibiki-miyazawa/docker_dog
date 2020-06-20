@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_06_113521) do
+ActiveRecord::Schema.define(version: 2020_06_09_093613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,12 @@ ActiveRecord::Schema.define(version: 2020_06_06_113521) do
     t.index ["user_id"], name: "index_microposts_on_user_id"
   end
 
+  create_table "prefectures", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
@@ -85,9 +91,12 @@ ActiveRecord::Schema.define(version: 2020_06_06_113521) do
     t.string "remember_digest"
     t.string "image"
     t.boolean "admin", default: false
+    t.bigint "prefecture_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["prefecture_id"], name: "index_users_on_prefecture_id"
   end
 
   add_foreign_key "dogs", "users"
   add_foreign_key "microposts", "users"
+  add_foreign_key "users", "prefectures"
 end
