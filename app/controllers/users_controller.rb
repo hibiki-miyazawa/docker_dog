@@ -9,7 +9,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    redirect_to root_url and return unless @user.activated?
     @microposts = @user.microposts
     @dogs = @user.dogs
     @currentUserEntry = Entry.where(user_id: current_user.id)
@@ -33,9 +32,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      @user.send_activation_email
-      flash[:info] = "メールを確認して、アカウントを有効にしてください"
-      redirect_to root_url
+      log_in @user
+      flash[:success] = "Welcome to the Community of Dog!"
+      redirect_to @user
     else
       render 'new'
     end
@@ -62,7 +61,7 @@ class UsersController < ApplicationController
       redirect_to root_url
     else
       user.destroy
-      flash[:success] = "User Delete."
+      flash[:success] = "User delete."
       redirect_to root_url
     end
   end
