@@ -1,18 +1,18 @@
 <%= form_for(@user, url: yield(:url)) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
-    <%= f.label :name %>
+    <%= f.label :名前 %>
     <%= f.text_field :name %>
 
-    <%= f.label :email %>
+    <%= f.label :メールアドレス %>
     <%= f.email_field :email %>
 
-    <%= f.label :prefecture_id %>
+    <%= f.label :都道府県 %>
     <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name, include_blank: '選択して下さい' %>
 
-    <%= f.label :password %>
+    <%= f.label :パスワード %>
     <%= f.password_field :password %>
 
-    <%= f.label :password_confirmation, "Confirmation" %>
+    <%= f.label :password_confirmation, "パスワード(確認)" %>
     <%= f.password_field :password_confirmation %>
     
     <%= f.submit yield(:btn_text), class: "btn btn-success" %>

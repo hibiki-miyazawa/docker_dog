@@ -9,7 +9,7 @@ class DogsController < ApplicationController
   def create
     @dog = current_user.dogs.new(dog_params)
     if @dog.save
-      flash[:success] = "Done"
+      flash[:success] = "登録完了"
       redirect_to @dog
     else
       render 'new'
@@ -29,14 +29,14 @@ class DogsController < ApplicationController
     if params[:remove_image_name] == '1'
       @dog.image_name = nil
       if @dog.update_attributes(dog_params)
-        flash[:success] = "#{@dog.name}'s profile update."
+        flash[:success] = "#{@dog.name}のプロフィールが変更されました"
         redirect_to @dog
       else
         render 'edit'
       end
     else
       if @dog.update_attributes(dog_params)
-        flash[:success] = "#{@dog.name}'s profile update."
+        flash[:success] = "#{@dog.name}のプロフィールが変更されました"
         redirect_to @dog
       else
         render 'edit'
@@ -46,7 +46,7 @@ class DogsController < ApplicationController
 
   def destroy
     @dog.destroy
-    flash[:success] = "Dog deleted."
+    flash[:success] = "削除されました"
     redirect_to root_path
   end
 
