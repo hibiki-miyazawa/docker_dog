@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+  get 'password_resets/edit'
   get 'dogsnew', to: 'dogs#new'
   post 'dogsnew', to: 'dogs#create'
   resources :dogs
@@ -21,4 +23,6 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   resources :messages, only: [:create]
   resources :rooms, only: [:create, :show]
+  resources :account_activations, only: [:edit]
+  resources :password_resets, only: [:new, :create, :edit, :update]
 end

@@ -7,12 +7,16 @@ michael:
   password_digest: <%= User.digest('password') %>
   prefecture_id: 0
   admin: true
+  activated: true
+  activated_at: <%= Time.zone.now %>
 
 archer:
   name: Sterling Archer
   email: archer@example.co.jp
   password_digest: <%= User.digest('password') %>
   prefecture_id: 1
+  activated: true
+  activated_at: <%= Time.zone.now %>
 
 lana:
   id: 2
@@ -20,10 +24,14 @@ lana:
   email: Lanak@example.gov
   password_digest: <%= User.digest('password') %>
   prefecture_id: 0
+  activated: true
+  activated_at: <%= Time.zone.now %>
 
 malory:
   name: Malory Archer
   email: boss@example.gov
   password_digest: <%= User.digest('password') %>
   prefecture_id: 1
+  activated: true
+  activated_at: <%= Time.zone.now %>
   
