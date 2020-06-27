@@ -24,7 +24,7 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     log_in_as(@non_admin)
     get user_path(@non_admin)
     assert_template 'users/show'
-    assert_select 'a[href=?]', edit_user_path(@non_admin), text: 'User Settings'
+    assert_select 'a[href=?]', edit_user_path(@non_admin), text: '編集'
     assert_difference 'User.count', -1 do
       delete user_path(@non_admin)
     end

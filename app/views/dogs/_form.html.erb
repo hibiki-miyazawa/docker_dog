@@ -4,7 +4,7 @@
     <%= f.text_field :name %>
 
     <%= f.label :性別 %>
-    <%= f.select :gender, [["male", "male"], ["female", "female"]], include_blank: "Please select" %>
+    <%= f.select :gender, [["男の子", "男の子"], ["女の子", "女の子"]], include_blank: "選択してください" %>
 
     <%= f.label :お誕生日 %>
     <%= f.date_select :birthday %>

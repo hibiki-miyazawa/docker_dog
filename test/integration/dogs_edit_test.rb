@@ -4,12 +4,13 @@ include ActionDispatch::TestProcess
 class DogsEditTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:michael)
-    @dog = dogs(:dog1)
+    @dog = dogs(:dog)
   end
 
   test "successful edit" do
     @image_name = fixture_file_upload('test/fixtures/files/20200528140356.jpg', 'image/jpg')
     log_in_as(@user)
+    assert_not @user.dogs.empty?
     get edit_dog_path(@dog)
     assert_template 'dogs/edit'
     patch dog_path(@dog), params: { dog:{ name: "kuro", gender: "male", breed: "chiwawa", hospital: "DEFhospital", salon: "defsalon", image_name: @image_name } }

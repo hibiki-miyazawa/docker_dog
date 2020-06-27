@@ -26,7 +26,7 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_match content, response.body
 
-    assert_select 'a', text: 'delete'
+    assert_select 'a', text: '削除'
     first_micropost = @user.microposts.first
     assert_difference 'Micropost.count', -1 do
       delete micropost_path(first_micropost)
