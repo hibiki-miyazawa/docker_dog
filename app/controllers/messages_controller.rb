@@ -6,14 +6,14 @@ class MessagesController < ApplicationController
             @message = Message.new(params.require(:message).permit(:user_id, :message, :room_id).merge(user_id: current_user.id))
             if @message.save
                 redirect_to "/rooms/#{@message.room_id}"
-                flash[:success] = "send completely"
+                flash[:success] = "送信完了"
             else
                 redirect_to "/rooms/#{@message.room_id}"
-                flash[:danger] = "failed to send message"
+                flash[:danger] = "送信失敗"
             end
         else
             redirect_to "/rooms/#{@message.room_id}"
-            flash[:danger] = "failed to send message"
+            flash[:danger] = "送信失敗"
         end
     end
 end

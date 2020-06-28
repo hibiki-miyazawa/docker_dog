@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      flash[:success] = "Welcome to the Community of Dog!"
+      flash[:success] = "ようこそ"
       redirect_to @user
     else
       render 'new'
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = "プロフィールが変更されました"
       redirect_to @user
     else
       render 'edit'
@@ -61,7 +61,7 @@ class UsersController < ApplicationController
       redirect_to root_url
     else
       user.destroy
-      flash[:success] = "User delete."
+      flash[:success] = "ユーザーが削除されました"
       redirect_to root_url
     end
   end

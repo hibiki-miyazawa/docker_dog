@@ -1,5 +1,5 @@
 <li>
-    <span><%= dog.name %></span>
+    <h4><%= dog.name %></h4>
     <% if dog.image_name.present? %>
         <%= link_to image_tag("#{dog.image_name}" ), dog_path(dog) %>
     <% else %>

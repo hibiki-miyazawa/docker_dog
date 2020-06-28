@@ -9,6 +9,7 @@ michael:
   admin: true
 
 archer:
+  id: 1
   name: Sterling Archer
   email: archer@example.co.jp
   password_digest: <%= User.digest('password') %>
@@ -22,6 +23,7 @@ lana:
   prefecture_id: 0
 
 malory:
+  id: 3
   name: Malory Archer
   email: boss@example.gov
   password_digest: <%= User.digest('password') %>
