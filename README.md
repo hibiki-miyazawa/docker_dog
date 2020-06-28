@@ -1,24 +1,59 @@
-# README
+### readme.md
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+```
+image
+```
 
-Things you may want to cover:
+## 詳しい内容
+```
+```
 
-* Ruby version
+## 開発環境
+```
+Ruby 2.7.0
+Rails 6.0
+pg 1.2.3
+bootstrap 4.5.0
+```
 
-* System dependencies
+## アプリ機能
+### 1. 飼い主と飼っているわんちゃんの登録
+```
+飼い主（ユーザー）登録したのち、飼っているわんちゃんの登録をします
+image
+```
 
-* Configuration
+### 2. 飼い主さんの呟き、情報発信、情報共有のための投稿機能
+```
+フォローしている飼い主さんの投稿が一覧でみれます
+もちろんおんなじ画面から投稿もしていただけます
+image
+```
 
-* Database creation
+### 3. 「保存」機能
+```
+気になった投稿を保存することができます
+image
+```
 
-* Database initialization
+### 4. フォロー機能
+```
+気になった飼い主さん、仲良くしたい飼い主さんをフォローすることができます
+image
+```
+### 5. 「友達」機能
+```
+お互いフォローし合っている飼い主さん同士は「友達」となり、直接メールを送ってやり取りすることができます
+image
+都道府県ごとに、飼い主さんを探すこともできます
+image
+```
 
-* How to run the test suite
+## 動作環境
+```
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+## 使用方法
+```
+```
 
-* Deployment instructions
-
-* ...
