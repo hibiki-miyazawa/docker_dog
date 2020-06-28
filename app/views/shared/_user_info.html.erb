@@ -2,3 +2,4 @@
 <h1><%= @user.name %></h1>
 <span><%= @user.prefecture.name %></span>
 <span><b>投稿:</b> <%= @user.microposts.count %></span>
+<%= link_to "いいね一覧", likes_path, class: "color" %>

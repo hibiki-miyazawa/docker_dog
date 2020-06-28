@@ -30,6 +30,8 @@ class User < ApplicationRecord
     belongs_to :prefecture, optional: true
     validates :prefecture_id, presence: true
 
+    has_many :likes, dependent: :destroy
+
     def User.digest(string)
         cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
         BCrypt::Password.create(string, cost: cost)
