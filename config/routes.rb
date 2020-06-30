@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :contacts
   get 'dogsnew', to: 'dogs#new'
   post 'dogsnew', to: 'dogs#create'
   resources :dogs
