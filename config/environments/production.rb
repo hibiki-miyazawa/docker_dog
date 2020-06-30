@@ -64,8 +64,8 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "docker_dog_production"
 
   config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = { host: 'shielded-ravine-09485.herokuapp.com' }
-  ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     user_name: ENV['SENDGRID_USERNAME'],
     password: ENV['SENDGRID_PASSWORD'],

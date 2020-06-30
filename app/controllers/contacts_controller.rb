@@ -10,6 +10,7 @@ class ContactsController < ApplicationController
       flash[:success] = 'お問い合わせを受け付けました'
       redirect_to root_path
     else
+      flash[:danger] = 'メールが送信できませんでした'
       render :new
     end
   end
