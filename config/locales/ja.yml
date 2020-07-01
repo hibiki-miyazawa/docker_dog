@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    attributes:
+      dog:
+        name: 名前
+        birthday: 誕生日
+        breed: 犬種
+        hospital: 病院
+        salon: ドッグサロン
+        gender: 性別
+      micropost:
+        content: 文章
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        prefecture_id: 都道府県
+
+      
