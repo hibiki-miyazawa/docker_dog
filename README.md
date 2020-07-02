@@ -1,13 +1,13 @@
 ### readme.md
 
-```
-image
-```
+<img width="1438" alt="スクリーンショット 2020-06-29 18 05 45" src="https://user-images.githubusercontent.com/62281746/85994813-4875ce80-ba33-11ea-96de-81e0ffae49e8.png">
+
 
 ## 開発環境
 ```
 Ruby 2.7.0
 Rails 6.0
+docker 19.03.8
 pg 1.2.3
 bootstrap 4.5.0
 VSC(Visual Studio Code)
@@ -18,6 +18,8 @@ VSC(Visual Studio Code)
 わんちゃんと飼い主さんのための、コミュニティーツールです
 近くのわんちゃんオーナーさんとつながったり、おすすめのスポットの共有、動物病院の情報やオフ会の提案など、わんちゃんにとってより良い生活になるようにサポートするのが目的です
 ```
+<img width="1440" alt="スクリーンショット 2020-06-29 16 38 27" src="https://user-images.githubusercontent.com/62281746/85986393-224a3180-ba27-11ea-93b8-c17791326231.png">
+
 ### 1. 飼い主さんと飼っているわんちゃんの登録
 ```
 飼い主（ユーザー）登録したのち、飼っているわんちゃんの登録をします
@@ -34,22 +36,28 @@ VSC(Visual Studio Code)
 気になった投稿を保存することができます
 ```
 
-### 4. フォロー機能
-```
-気になった飼い主さん、仲良くしたい飼い主さんをフォローすることができます
-```
-
 ### 5. 「友達」機能
 ```
 お互いフォローし合っている飼い主さん同士は「友達」となり、直接メールを送ってやり取りすることができます
 都道府県ごとに、飼い主さんを探すこともできます
+<<<<<<< HEAD
 ```
 
 ## 動作環境
 ```
+=======
+>>>>>>> 6a3ea5c7513dc5bf28841f67f999f2e41a112ccb
 ```
 
 ## 使用方法
 ```
-```
+開発環境
+1.ローカル環境にて空のリポジトリを作成
+2. $ git remote add origin git@github.com:hibiki-miyazawa/docker_dog.git
+3. $ git pull origin master
+4. $ docker-compose up
+5. http://localhost:3000/ へアクセス
 
+本番環境
+https://shielded-ravine-09485.herokuapp.com/　へアクセス
+```
