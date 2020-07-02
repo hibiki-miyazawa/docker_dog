@@ -1,6 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   content: "One post."
   created_at: <%= 10.minutes.ago %>
   user: michael
@@ -21,11 +22,13 @@ most_recent:
   user: michael
 
 ants: 
+  id: 2
   content: "Archer first post!"
   created_at: <%= 2.years.ago %>
   user: archer
 
 zone:
+  id: 3
   content: "Archer second post!"
   created_at: <%= 3.days.ago %>
   user: archer
